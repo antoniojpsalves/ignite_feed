@@ -22,7 +22,7 @@ export function Post({author, post}: Props) {
             <div className={styles.content}>
                 <p>Fala galeraaa</p>
                 <p>Acabei de subir um novo projeto no meu portifólio. Comecei a estudar react no ignite!!!</p>
-                <p>#novoprojeto  <a href="https://app.rocketseat.com.br/">#rocketseat</a></p>
+                <p> <a href="https://github.com/antoniojpsalves/ignite_feed" target="_blank" rel="noopener noreferrer"> #novoprojeto</a>  <a href="https://app.rocketseat.com.br/">#rocketseat</a></p>
             </div>
 
             <form className={styles.commentForm}>
