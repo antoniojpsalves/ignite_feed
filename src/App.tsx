@@ -12,8 +12,8 @@ function App() {
       <div className={styles.wrapper}>
         <Sidebar />
         <main>
-          <Post author="Antonio Alves" post=""/>
-          <Post author="Antonio Alves" post=""/>
+          <Post author="Antonio Alves" post="" />
+          <Post author="Antonio Alves" post="" />
         </main>
       </div>
     </>

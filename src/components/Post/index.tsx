@@ -3,10 +3,11 @@ interface Props {
     post: string;
 }
 
+import { Comment } from '../Comment';
 import styles from './style.module.css';
 
-export function Post({author, post}: Props) {
-    return(
+export function Post({ author, post }: Props) {
+    return (
         <article className={styles.post}>
             <header>
                 <div className={styles.author}>
@@ -34,6 +35,12 @@ export function Post({author, post}: Props) {
                     <button type="submit">Publicar</button>
                 </footer>
             </form>
+
+            <div className={styles.commentList}>
+                <Comment />
+                <Comment />
+                <Comment />
+            </div>
         </article>
     );
 }
