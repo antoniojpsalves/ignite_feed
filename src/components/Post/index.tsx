@@ -4,6 +4,7 @@ interface Props {
 }
 
 import { Comment } from '../Comment';
+import { Avatar } from '../avatar';
 import styles from './style.module.css';
 
 export function Post({ author, post }: Props) {
@@ -11,7 +12,7 @@ export function Post({ author, post }: Props) {
         <article className={styles.post}>
             <header>
                 <div className={styles.author}>
-                    <img className={styles.avatar} src="https://github.com/antoniojpsalves.png" alt="Foto do perfil" />
+                    <Avatar search="https://github.com/antoniojpsalves.png" />
                     <div className={styles.authorInfo}>
                         <strong>{author}</strong>
                         <span>Web Developer</span>
