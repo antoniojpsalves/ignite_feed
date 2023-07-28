@@ -1,47 +1,62 @@
 interface Props {
-    author: string;
-    post: string;
+  author: {
+    avatarUrl: string;
+    name: string;
+    role: string;
+  };
+  content: { type: string; content: string; }[];
+  publishedAt: Date;
+}
+
+
+interface ContentProps {
+  type: string;
+  content: string[];
 }
 
 import { Comment } from '../Comment';
 import { Avatar } from '../avatar';
 import styles from './style.module.css';
 
-export function Post({ author, post }: Props) {
-    return (
-        <article className={styles.post}>
-            <header>
-                <div className={styles.author}>
-                    <Avatar search="https://github.com/antoniojpsalves.png" />
-                    <div className={styles.authorInfo}>
-                        <strong>{author}</strong>
-                        <span>Web Developer</span>
-                    </div>
-                </div>
-                <time title="15 de Dezembro às 18:14" dateTime="2022-11-15" >Publicado há 1 hora</time>
-            </header>
+export function Post({ author, content, publishedAt }: Props) {
 
-            <div className={styles.content}>
-                <p>Fala galeraaa</p>
-                <p>Acabei de subir um novo projeto no meu portifólio. Comecei a estudar react no ignite!!!</p>
-                <p> <a href="https://github.com/antoniojpsalves/ignite_feed" target="_blank" rel="noopener noreferrer"> #novoprojeto</a>  <a href="https://app.rocketseat.com.br/">#rocketseat</a></p>
-            </div>
 
-            <form className={styles.commentForm}>
-                <strong>Deixe seu feedback</strong>
-                <textarea
-                    placeholder='Deixe um comentário...'
-                />
-                <footer>
-                    <button type="submit">Publicar</button>
-                </footer>
-            </form>
+  const { avatarUrl, name, role } = author
 
-            <div className={styles.commentList}>
-                <Comment />
-                <Comment />
-                <Comment />
-            </div>
-        </article>
-    );
+  return (
+    <article className={styles.post}>
+      <header>
+        <div className={styles.author}>
+          <Avatar search={avatarUrl} />
+          <div className={styles.authorInfo}>
+            <strong>{name}</strong>
+            <span>{role}</span>
+          </div>
+        </div>
+        <time title="15 de Dezembro às 18:14" dateTime="2022-11-15" >Publicado há 1 hora</time>
+      </header>
+
+      <div className={styles.content}>
+        {
+
+        }
+      </div>
+
+      <form className={styles.commentForm}>
+        <strong>Deixe seu feedback</strong>
+        <textarea
+          placeholder='Deixe um comentário...'
+        />
+        <footer>
+          <button type="submit">Publicar</button>
+        </footer>
+      </form>
+
+      <div className={styles.commentList}>
+        <Comment />
+        <Comment />
+        <Comment />
+      </div>
+    </article>
+  );
 }
