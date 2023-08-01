@@ -63,7 +63,7 @@ export function Post({ author, content, publishedAt }: Props) {
 
   function handleNewCommentChange() {
 
-    setNewCommentText(event?.target.value)
+    setNewCommentText(event?.target?.value)
   }
 
 
@@ -86,9 +86,9 @@ export function Post({ author, content, publishedAt }: Props) {
         {
           content.map(line => {
             if (line.type === 'paragraph') {
-              return <p key={line.content + line.type}> {line.content} </p>
+              return <p key={line.content}> {line.content} </p>
             }
-            return <p><a href={line.content} key={line.content + line.type} target='_blank'>{line.content}</a></p>
+            return <p><a href={line.content} key={line.content} target='_blank'>{line.content}</a></p>
           })
         }
       </div>
