@@ -35,9 +35,7 @@ export function Post({ author, content, publishedAt }: Props) {
 
 
   const [comments, setComments] = useState([
-    1,
-    2,
-    3
+    'post muito legal'
   ])
 
   const publishedDateFormatted = format(publishedAt, "d 'de' LLLL 'às' HH:mm'h'", {
@@ -53,7 +51,11 @@ export function Post({ author, content, publishedAt }: Props) {
   function handleCreateNewComment(event: FormEvent) {
 
     event.preventDefault()
-    setComments([...comments, comments.length + 1])
+
+    // console.log(event.target.commentArea.value);
+
+    const newComment = event.target.commentArea.value;
+    setComments([...comments, newComment])
   }
 
 
@@ -76,9 +78,9 @@ export function Post({ author, content, publishedAt }: Props) {
         {
           content.map(line => {
             if (line.type === 'paragraph') {
-              return <p key={line.content}>{line.content}</p>
+              return <p key={line.content + line.type}> {line.content} </p>
             }
-            return <p><a href={line.content} key={line.content} target='_blank'>{line.content}</a></p>
+            return <p><a href={line.content} key={line.content + line.type} target='_blank'>{line.content}</a></p>
           })
         }
       </div>
@@ -86,6 +88,7 @@ export function Post({ author, content, publishedAt }: Props) {
       <form onSubmit={event => handleCreateNewComment(event)} className={styles.commentForm}>
         <strong>Deixe seu feedback</strong>
         <textarea
+          name="commentArea"
           placeholder='Deixe um comentário...'
         />
         <footer>
@@ -95,7 +98,7 @@ export function Post({ author, content, publishedAt }: Props) {
 
       <div className={styles.commentList}>
         {
-          comments.map(comentario => (<Comment key={comentario} />))
+          comments.map(comentario => (<Comment key={comentario} content={comentario} />))
         }
       </div>
     </article>
