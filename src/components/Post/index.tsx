@@ -38,6 +38,9 @@ export function Post({ author, content, publishedAt }: Props) {
     'post muito legal'
   ])
 
+
+  const [newCommentText, setNewCommentText] = useState('')
+
   const publishedDateFormatted = format(publishedAt, "d 'de' LLLL 'às' HH:mm'h'", {
     locale: ptBR
   })
@@ -53,9 +56,14 @@ export function Post({ author, content, publishedAt }: Props) {
     event.preventDefault()
 
     // console.log(event.target.commentArea.value);
+    setComments([...comments, newCommentText])
+    setNewCommentText('')
+  }
 
-    const newComment = event.target.commentArea.value;
-    setComments([...comments, newComment])
+
+  function handleNewCommentChange() {
+
+    setNewCommentText(event?.target.value)
   }
 
 
@@ -90,6 +98,8 @@ export function Post({ author, content, publishedAt }: Props) {
         <textarea
           name="commentArea"
           placeholder='Deixe um comentário...'
+          value={newCommentText}
+          onChange={handleNewCommentChange}
         />
         <footer>
           <button type="submit">Publicar</button>
