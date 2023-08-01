@@ -11,7 +11,7 @@ export function Sidebar() {
             <div className={styles.profile}>
                 <Avatar search='https://github.com/antoniojpsalves.png' />
                 <strong>Antonio Alves</strong>
-                <span>Web Developer</span>
+                <span>Software Engineer</span>
             </div>
             <footer>
                 <a href="#">
