@@ -1,8 +1,8 @@
-import { FormEvent } from 'react';
+import { ChangeEvent, FormEvent } from 'react';
 import { Comment } from '../Comment';
 import { Avatar } from '../avatar';
 import styles from './style.module.css';
-import { format, formatDistanceToNow } from 'date-fns';
+import { format, formatDistanceToNow, getDate, getTime } from 'date-fns';
 import ptBR from 'date-fns/locale/pt-BR';
 
 import { useState } from 'react';
@@ -26,16 +26,15 @@ interface ContentProps {
 
 export function Post({ author, content, publishedAt }: Props) {
 
-  // const publishedDateFormatted = new Intl.DateTimeFormat('pt-BR', {
-  //   day: '2-digit',
-  //   month: 'long',
-  //   hour: '2-digit',
-  //   minute: '2-digit',
-  // }).format(publishedAt)
-
-
   const [comments, setComments] = useState([
-    'post muito legal'
+    {
+      id: 1,
+      comment: 'post muito legal !'
+    },
+    {
+      id: 2,
+      comment: 'caraca, maneiro !'
+    }
   ])
 
 
@@ -50,22 +49,35 @@ export function Post({ author, content, publishedAt }: Props) {
     addSuffix: true,
   })
 
-
   function handleCreateNewComment(event: FormEvent) {
 
     event.preventDefault()
 
+    const lastComment = comments.reduce((prev, current) => {
+      return prev.id > current.id ? prev : current;
+    })
+
+    // console.log(lastComment)
+
+    const newComment = {
+      id: lastComment.id + 1,
+      comment: newCommentText
+    }
+
     // console.log(event.target.commentArea.value);
-    setComments([...comments, newCommentText])
+    setComments([...comments, newComment])
     setNewCommentText('')
   }
 
+  function deleteComment(comment: any) {
+    if (confirm('Deseja mesmo deletar esse comentário?'))
+      console.log(`Tentando deletar o seguinte comentário: ${comment}`);
+  }
 
-  function handleNewCommentChange() {
+  function handleNewCommentChange(event: ChangeEvent<HTMLTextAreaElement>) {
 
     setNewCommentText(event?.target?.value)
   }
-
 
   const { avatarUrl, name, role } = author
 
@@ -85,10 +97,14 @@ export function Post({ author, content, publishedAt }: Props) {
       <div className={styles.content}>
         {
           content.map(line => {
+
+            const temp_id = Math.random();
+
+            // console.log(temp_id);
             if (line.type === 'paragraph') {
-              return <p key={line.content}> {line.content} </p>
+              return <p key={temp_id}> {line.content} </p>
             }
-            return <p><a href={line.content} key={line.content} target='_blank'>{line.content}</a></p>
+            return <p><a href={line.content} key={temp_id} target='_blank'>{line.content}</a></p>
           })
         }
       </div>
@@ -108,7 +124,7 @@ export function Post({ author, content, publishedAt }: Props) {
 
       <div className={styles.commentList}>
         {
-          comments.map(comentario => (<Comment key={comentario} content={comentario} />))
+          comments.map(comentario => (<Comment key={comentario.id} content={comentario.comment} onDeleteComment={deleteComment} />))
         }
       </div>
     </article>
