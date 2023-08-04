@@ -11,7 +11,7 @@ interface CommentProps {
 export function Comment({ content, onDeleteComment }: CommentProps) {
 
   function handleDeleteComment() {
-    console.log('tentando deletar o comentário: ')
+    // console.log('tentando deletar o comentário: ')
 
     onDeleteComment(content);
   }

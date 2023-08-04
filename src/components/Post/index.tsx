@@ -70,8 +70,13 @@ export function Post({ author, content, publishedAt }: Props) {
   }
 
   function deleteComment(comment: any) {
-    if (confirm('Deseja mesmo deletar esse comentário?'))
-      console.log(`Tentando deletar o seguinte comentário: ${comment}`);
+
+    // console.log('Comentário recebido para deletar');
+    // console.log(comment);
+    if (confirm(`Deseja mesmo deletar esse comentário? \n ${comment}`)) {
+      const filteredComments = comments.filter(c => c.comment !== comment)
+      setComments(filteredComments);
+    }
   }
 
   function handleNewCommentChange(event: ChangeEvent<HTMLTextAreaElement>) {
