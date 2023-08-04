@@ -69,14 +69,11 @@ export function Post({ author, content, publishedAt }: Props) {
     setNewCommentText('')
   }
 
-  function deleteComment(comment: any) {
+  function deleteComment(commentToDelet: any) {
 
-    // console.log('Comentário recebido para deletar');
-    // console.log(comment);
-    if (confirm(`Deseja mesmo deletar esse comentário? \n ${comment}`)) {
-      const filteredComments = comments.filter(c => c.comment !== comment)
-      setComments(filteredComments);
-    }
+    const commentsWithOutDeletedOne = comments.filter(comment => comment.comment !== commentToDelet)
+    setComments(commentsWithOutDeletedOne);
+
   }
 
   function handleNewCommentChange(event: ChangeEvent<HTMLTextAreaElement>) {
