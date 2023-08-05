@@ -1,4 +1,4 @@
-import { ChangeEvent, FormEvent } from 'react';
+import { ChangeEvent, FormEvent, InvalidEvent } from 'react';
 import { Comment } from '../Comment';
 import { Avatar } from '../avatar';
 import styles from './style.module.css';
@@ -69,7 +69,7 @@ export function Post({ author, content, publishedAt }: Props) {
     setNewCommentText('')
   }
 
-  function deleteComment(commentToDelet: any) {
+  function deleteComment(commentToDelet: string) {
 
     const commentsWithOutDeletedOne = comments.filter(comment => comment.comment !== commentToDelet)
     setComments(commentsWithOutDeletedOne);
@@ -83,7 +83,7 @@ export function Post({ author, content, publishedAt }: Props) {
   }
 
   //Método que usarei para trocar a mensagem default
-  function handleNewCommentInvalid(event: ChangeEvent<HTMLTextAreaElement>) {
+  function handleNewCommentInvalid(event: InvalidEvent<HTMLTextAreaElement>) {
     event.target.setCustomValidity("Esse campo é obrigatório!");
   }
 
