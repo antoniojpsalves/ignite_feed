@@ -77,11 +77,20 @@ export function Post({ author, content, publishedAt }: Props) {
   }
 
   function handleNewCommentChange(event: ChangeEvent<HTMLTextAreaElement>) {
-
+    //Preciso redefinir como vazio, para que ele não execute como erro, ao modificar o estado.
+    event.target.setCustomValidity("");
     setNewCommentText(event?.target?.value)
   }
 
+  //Método que usarei para trocar a mensagem default
+  function handleNewCommentInvalid(event: ChangeEvent<HTMLTextAreaElement>) {
+    event.target.setCustomValidity("Esse campo é obrigatório!");
+  }
+
   const { avatarUrl, name, role } = author
+
+
+  const isNewCommentEmpty = newCommentText.length === 0
 
   return (
     <article className={styles.post}>
@@ -118,9 +127,11 @@ export function Post({ author, content, publishedAt }: Props) {
           placeholder='Deixe um comentário...'
           value={newCommentText}
           onChange={handleNewCommentChange}
+          onInvalid={handleNewCommentInvalid}
+          required
         />
         <footer>
-          <button type="submit">Publicar</button>
+          <button type="submit" disabled={isNewCommentEmpty}>Publicar</button>
         </footer>
       </form>
 
